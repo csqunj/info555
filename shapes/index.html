@@ -1,15 +1,32 @@
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
 <title>Stella Simulator</title>
 
 <link rel="stylesheet" href="script/jquery-ui.css" />
 <script type="text/javascript" src="script/jquery.min.js"></script>
 <script type="text/javascript" src="script/jquery-ui.js"></script>
 <script type="text/javascript" src="script/jquery.ui.touch-punch.min.js"></script>
- 
+<script type="text/javascript" src="script/interact.min.js"></script>
  
 <!-- CSS -->
 <style type="text/css">
+body {
+  font-family: 'Khula', sans-serif;
+  text-align: center;
+  font-size: 25px;
+  color: #4A4A4A;
+}
+
+h1 {
+  color: #EF5722;
+  font-size: 40px;
+}
+
+h2 {
+  color: #4A4A4A;
+}
+
 .drag {
     cursor: pointer;
     text-align: center;
@@ -19,14 +36,26 @@
  
 .container {
     background-color: #fff;
-    width: 600px;
-    height: 600px;
+    width: 80%;
+    height: 70%;
     border: 1px solid black;
     margin: auto;
-    margin-top: 100px;
     text-align: center;
     padding: 10px;
 }
+
+#scale-element {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+  touch-action: none;
+}
+
+#scale-element.reset {
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
 </style>
  
  
@@ -37,14 +66,62 @@
             stack: ".drag"
         });
     });
+
+    var angleScale = {
+  angle: 0,
+  scale: 1
+}
+var gestureArea = document.getElementById('gesture-area')
+var scaleElement = document.getElementById('scale-element')
+var resetTimeout
+
+interact(gestureArea)
+  .gesturable({
+    onstart: function (event) {
+      angleScale.angle -= event.angle
+
+      clearTimeout(resetTimeout)
+      scaleElement.classList.remove('reset')
+    },
+    onmove: function (event) {
+      // document.body.appendChild(new Text(event.scale))
+      var currentAngle = event.angle + angleScale.angle
+      var currentScale = event.scale * angleScale.scale
+
+      scaleElement.style.webkitTransform =
+      scaleElement.style.transform =
+        'rotate(' + currentAngle + 'deg)' + 'scale(' + currentScale + ')'
+
+      // uses the dragMoveListener from the draggable demo above
+      dragMoveListener(event)
+    },
+    onend: function (event) {
+      angleScale.angle = angleScale.angle + event.angle
+      angleScale.scale = angleScale.scale * event.scale
+
+      resetTimeout = setTimeout(reset, 1000)
+      scaleElement.classList.add('reset')
+    }
+  })
+  .draggable({ onmove: dragMoveListener })
+
+function reset () {
+  scaleElement.style.webkitTransform =
+    scaleElement.style.transform =
+    'scale(1)'
+
+  angleScale.angle = 0
+  angleScale.scale = 1
+}
 </script>
 </head>
 
 <body>
 <!-- HTML -->
-<div class="container"><h1>Stella Simulator</h1>
+<h1>KAM</h1>
+<div class="container" id="gesture-area"><h2>Stella Simulator</h2>
     <p>Drag and drop colorful shapes to the canvas and create your own Stella-inspired design.</p><p style="position:absolute; bottom: 8%; left: 39%;">Don't forget to take a screenshot and share your work!</p></div>
-<img class="drag" src="4.png" style="left:10px;top:0px">
+<img class="drag" src="4.png" style="left:10px;top:0px" id="scale-element">
 <img class="drag" src="2.png" style="left:100px;top:0px">
 <img class="drag" src="3.png" style="left:200px;top:0px">
 <img class="drag" src="1.png" style="left:300px;top:0px">
