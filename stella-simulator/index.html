@@ -1,0 +1,101 @@
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Khula&display=swap" rel="stylesheet">
+<title>Stella Simulator</title>
+
+<link rel="stylesheet" href="script/jquery-ui.css" />
+<script type="text/javascript" src="script/jquery.min.js"></script>
+<script type="text/javascript" src="script/jquery-ui.js"></script>
+<script type="text/javascript" src="script/jquery.ui.touch-punch.min.js"></script>
+ 
+ 
+<!-- CSS -->
+<style type="text/css">
+body {
+  font-family: 'Khula', sans-serif;
+  text-align: center;
+  font-size: 18px;
+  color: #4A4A4A;
+}
+
+p {
+    margin-top: 5px;
+    padding-top: 0;
+}
+
+h1 {
+  color: #EF5722;
+  font-size: 35px;
+  margin: 0;
+}
+
+h2 {
+  color: #4A4A4A;
+  font-size: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.drag {
+    cursor: pointer;
+    text-align: center;
+    position: fixed;
+    max-width: 150px;
+}
+ 
+.container {
+    background-color: #fff;
+    width: 80%;
+    height: 75%;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+    padding: 25px;
+}
+</style>
+ 
+ 
+<!-- Javascript -->
+<script>
+    $(function () {
+        $(".drag").draggable({            
+            stack: ".drag"
+        });
+    });
+</script>
+</head>
+
+<body>
+<!-- HTML -->
+
+<div class="container">
+    <h1>KAM</h1>
+    <h2>Stella Simulator</h2>
+    <p>Drag and drop colorful shapes to the canvas and create your own Stella-inspired design.</p></div>
+<img class="drag" src="4.png" style="left:2%;top:0px">
+<img class="drag" src="2.png" style="left:10%;top:0px">
+<img class="drag" src="3.png" style="left:20%;top:0px">
+<img class="drag" src="1.png" style="left:30%;top:0px">
+<img class="drag" src="5.png" style="left:40%;top:0px">
+<img class="drag" src="6.png" style="left:35%;top:5%">
+
+<img class="drag" src="17.png" style="left:65%;top:0px">
+<img class="drag" src="16.png" style="left:70%;top:0px">
+<img class="drag" src="15.png" style="left:75%;top:0px">
+<img class="drag" src="13.png" style="left:80%;top:0px">
+
+<img class="drag" src="7.png" style="left:1%;bottom:0px">
+<img class="drag" src="8.png" style="left:6%;bottom:0px">
+<img class="drag" src="9.png" style="left:10%;bottom:0px">
+<img class="drag" src="10.png" style="left:15%;bottom:0px">
+<img class="drag" src="11.png" style="left:20%;bottom:0px">
+<img class="drag" src="12.png" style="left:25%;bottom:0px">
+
+<img class="drag" src="14.png" style="left:70%;bottom:0px">
+<img class="drag" src="18.png" style="left:78%;bottom:0px">
+<img class="drag" src="19.png" style="left:88%;bottom:0px">
+<p>Don't forget to take a screenshot and share your work!</p>
+</body>
+
+</html>
